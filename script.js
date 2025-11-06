@@ -176,3 +176,91 @@ if (videoGrid && pagination) {
   // Initial render
   updateGallery();
 }
+// ----------------- Dynamic Paginated Image Gallery -----------------
+const galleryGrid = document.getElementById('galleryGrid');
+const galleryPagination = document.getElementById('galleryPagination');
+
+if (galleryGrid && galleryPagination) {
+  // List all image filenames you’ve uploaded to the /images/ folder
+  const imageFiles = [
+    "aditi1.jpg",
+    "aditi2.jpg",
+    "aditi3.jpg",
+    "aditi4.jpg",
+    "aditi5.jpg",
+    "aditi6.jpg",
+    "aditi7.jpg",
+    "aditi8.jpg",
+    "aditi9.jpg",
+    "aditi10.jpg",
+    "aditi11.jpg",
+    "aditi12.jpg"
+    // add more here as you upload more images
+  ];
+
+  const imagesPerPage = 9;
+  let currentGalleryPage = 1;
+  const totalGalleryPages = Math.ceil(imageFiles.length / imagesPerPage);
+  const maxVisiblePages = 4;
+
+  function renderGallery() {
+    galleryGrid.innerHTML = '';
+    const start = (currentGalleryPage - 1) * imagesPerPage;
+    const end = start + imagesPerPage;
+    const currentImages = imageFiles.slice(start, end);
+
+    currentImages.forEach(img => {
+      const link = document.createElement('a');
+      link.href = `images/${img}`;
+      link.className = 'glightbox reveal';
+      link.setAttribute('data-gallery', 'aditi-gallery');
+      link.innerHTML = `<img src="images/${img}" alt="Aditi Budhathoki gallery image" />`;
+      galleryGrid.appendChild(link);
+    });
+
+    try { GLightbox({ selector: '.glightbox' }); } catch (err) {}
+  }
+
+  function renderGalleryPagination() {
+    galleryPagination.innerHTML = '';
+
+    const prev = document.createElement('button');
+    prev.textContent = 'Prev';
+    prev.className = 'page-btn';
+    if (currentGalleryPage === 1) prev.classList.add('disabled');
+    prev.onclick = () => { if (currentGalleryPage > 1) { currentGalleryPage--; updateGallery(); } };
+    galleryPagination.appendChild(prev);
+
+    let startPage = Math.max(1, currentGalleryPage - Math.floor(maxVisiblePages / 2));
+    let endPage = startPage + maxVisiblePages - 1;
+    if (endPage > totalGalleryPages) {
+      endPage = totalGalleryPages;
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      btn.className = 'page-btn';
+      if (i === currentGalleryPage) btn.classList.add('active');
+      btn.onclick = () => { currentGalleryPage = i; updateGallery(); };
+      galleryPagination.appendChild(btn);
+    }
+
+    const next = document.createElement('button');
+    next.textContent = 'Next';
+    next.className = 'page-btn';
+    if (currentGalleryPage === totalGalleryPages) next.classList.add('disabled');
+    next.onclick = () => { if (currentGalleryPage < totalGalleryPages) { currentGalleryPage++; updateGallery(); } };
+    galleryPagination.appendChild(next);
+  }
+
+  function updateGallery() {
+    renderGallery();
+    renderGalleryPagination();
+    window.scrollTo({ top: galleryGrid.offsetTop - 100, behavior: 'smooth' });
+  }
+
+  // Initial render
+  updateGallery();
+}
