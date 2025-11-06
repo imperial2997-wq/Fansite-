@@ -95,31 +95,16 @@
     </section>
 
     <!-- GALLERY -->
-    <section id="gallery" class="section container">
-      <h2 class="section-title reveal">Featured Gallery</h2>
-      <div class="gallery-grid">
-        <!-- Each anchor uses GLightbox data-gallery attribute -->
-        <a href="images/gallery-1.jpg" class="glightbox" data-gallery="aditi" data-title="Gallery 1 — credit">
-          <img src="images/gallery-1.jpg" alt="Gallery image 1" class="reveal" />
-        </a>
-        <a href="images/gallery-2.jpg" class="glightbox" data-gallery="aditi" data-title="Gallery 2 — credit">
-          <img src="images/gallery-2.jpg" alt="Gallery image 2" class="reveal" />
-        </a>
-        <a href="images/gallery-3.jpg" class="glightbox" data-gallery="aditi" data-title="Gallery 3 — credit">
-          <img src="images/gallery-3.jpg" alt="Gallery image 3" class="reveal" />
-        </a>
-        <a href="images/gallery-4.jpg" class="glightbox" data-gallery="aditi" data-title="Gallery 4 — credit">
-          <img src="images/gallery-4.jpg" alt="Gallery image 4" class="reveal" />
-        </a>
-        <a href="images/gallery-5.jpg" class="glightbox" data-gallery="aditi" data-title="Gallery 5 — credit">
-          <img src="images/gallery-5.jpg" alt="Gallery image 5" class="reveal" />
-        </a>
-        <a href="images/gallery-6.jpg" class="glightbox" data-gallery="aditi" data-title="Gallery 6 — credit">
-          <img src="images/gallery-6.jpg" alt="Gallery image 6" class="reveal" />
-        </a>
-      </div>
-      <div class="center"><a href="gallery.html" class="btn ghost">View full gallery</a></div>
-    </section>
+ <!-- AUTO GALLERY WITH PAGINATION -->
+<section id="gallery" class="section container">
+  <h2 class="section-title reveal">Featured Gallery</h2>
+  <p class="muted reveal">Explore Aditi Budhathoki’s latest photoshoots and fan uploads.</p>
+
+  <div id="galleryGrid" class="gallery-grid"></div>
+
+  <!-- Pagination -->
+  <div id="galleryPagination" class="pagination"></div>
+</section>
 
     <!-- LATEST NEWS TEASERS -->
     <section class="section container">
