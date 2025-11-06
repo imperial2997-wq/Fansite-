@@ -211,14 +211,17 @@ if (galleryGrid && galleryPagination) {
     const end = start + imagesPerPage;
     const currentImages = imageFiles.slice(start, end);
 
-    currentImages.forEach(img => {
-      const link = document.createElement('a');
-      link.href = `images/${img}`;
-      link.className = 'glightbox reveal';
-      link.setAttribute('data-gallery', 'aditi-gallery');
-      link.innerHTML = `<img src="images/${img}" alt="Aditi Budhathoki gallery image" />`;
-      galleryGrid.appendChild(link);
-    });
+// Use absolute URL for GitHub Pages (fixes broken images)
+const baseURL = "https://imperial2997-wq.github.io/Fansite-/images/";
+
+currentImages.forEach(img => {
+  const link = document.createElement('a');
+  link.href = `${baseURL}${img}`;
+  link.className = 'glightbox reveal';
+  link.setAttribute('data-gallery', 'aditi-gallery');
+  link.innerHTML = `<img src="${baseURL}${img}" alt="Aditi Budhathoki gallery image" />`;
+  galleryGrid.appendChild(link);
+});
 
     try { GLightbox({ selector: '.glightbox' }); } catch (err) {}
   }
