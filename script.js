@@ -189,84 +189,16 @@ if (galleryGrid && galleryPagination) {
   let currentGalleryPage = 1;
   const maxVisiblePages = 4;
 
-  async function fetchImages() {
-    try {
-      const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`);
-      const files = await response.json();
-      const imageFiles = files
-        .filter(file => file.name.match(/\.(jpg|jpeg|png|gif)$/i))
-        .map(file => file.name);
-      renderGallery(imageFiles);
-      renderGalleryPagination(imageFiles);
-    } catch (error) {
-      console.error("Error loading images:", error);
-      galleryGrid.innerHTML = "<p style='text-align:center;'>⚠️ Unable to load gallery images.</p>";
-    }
-  }
-
-  function renderGallery(imageFiles) {
-    galleryGrid.innerHTML = '';
-    const totalPages = Math.ceil(imageFiles.length / imagesPerPage);
-    const start = (currentGalleryPage - 1) * imagesPerPage;
-    const end = start + imagesPerPage;
-    const currentImages = imageFiles.slice(start, end);
-
-// Use absolute URL for GitHub Pages (fixes broken images)
-const baseURL = "https://imperial2997-wq.github.io/Fansite-/images/";
-
-currentImages.forEach(img => {
-  const link = document.createElement('a');
-  link.href = `${baseURL}${img}`;
-  link.className = 'glightbox reveal';
-  link.setAttribute('data-gallery', 'aditi-gallery');
-  link.innerHTML = `<img src="${baseURL}${img}" alt="Aditi Budhathoki gallery image" />`;
-  galleryGrid.appendChild(link);
-});
-
-    try { GLightbox({ selector: '.glightbox' }); } catch (err) {}
-  }
-
-  function renderGalleryPagination(imageFiles) {
-    galleryPagination.innerHTML = '';
-    const totalPages = Math.ceil(imageFiles.length / imagesPerPage);
-
-    const prev = document.createElement('button');
-    prev.textContent = 'Prev';
-    prev.className = 'page-btn';
-    if (currentGalleryPage === 1) prev.classList.add('disabled');
-    prev.onclick = () => { if (currentGalleryPage > 1) { currentGalleryPage--; updateGallery(imageFiles); } };
-    galleryPagination.appendChild(prev);
-
-    let startPage = Math.max(1, currentGalleryPage - Math.floor(maxVisiblePages / 2));
-    let endPage = startPage + maxVisiblePages - 1;
-    if (endPage > totalPages) {
-      endPage = totalPages;
-      startPage = Math.max(1, endPage - maxVisiblePages + 1);
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      const btn = document.createElement('button');
-      btn.textContent = i;
-      btn.className = 'page-btn';
-      if (i === currentGalleryPage) btn.classList.add('active');
-      btn.onclick = () => { currentGalleryPage = i; updateGallery(imageFiles); };
-      galleryPagination.appendChild(btn);
-    }
-
-    const next = document.createElement('button');
-    next.textContent = 'Next';
-    next.className = 'page-btn';
-    if (currentGalleryPage === totalPages) next.classList.add('disabled');
-    next.onclick = () => { if (currentGalleryPage < totalPages) { currentGalleryPage++; updateGallery(imageFiles); } };
-    galleryPagination.appendChild(next);
-  }
-
-  function updateGallery(imageFiles) {
+  // ✅ NEW: Load images from images.json (GitHub Pages compatible)
+async function fetchImages() {
+  const baseURL = "https://imperial2997-wq.github.io/Fansite-/images/";
+  try {
+    const response = await fetch(baseURL + "images.json");
+    const imageFiles = await response.json();
     renderGallery(imageFiles);
     renderGalleryPagination(imageFiles);
-    window.scrollTo({ top: galleryGrid.offsetTop - 100, behavior: 'smooth' });
+  } catch (error) {
+    console.error("Error loading images:", error);
+    galleryGrid.innerHTML = "<p style='text-align:center;'>⚠️ Could not load images.</p>";
   }
-
-  // Start
-  fetchImages();
 }
