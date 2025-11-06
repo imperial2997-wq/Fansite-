@@ -83,3 +83,96 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+// ----------------- Dynamic Paginated Video Gallery -----------------
+const videoGrid = document.getElementById('videoGrid');
+const pagination = document.getElementById('pagination');
+
+if (videoGrid && pagination) {
+  // --- Your full video list ---
+  const videos = [
+    { title: "Official Music Video", type: "youtube", src: "https://www.youtube.com/watch?v=abcd1234", thumb: "images/video-thumb-1.jpg" },
+    { title: "Behind the Scenes", type: "youtube", src: "https://www.youtube.com/watch?v=efgh5678", thumb: "images/video-thumb-2.jpg" },
+    { title: "Fan Edit Compilation", type: "mp4", src: "videos/aditi1.mp4", thumb: "images/video-thumb-3.jpg" },
+    { title: "Interview 2025", type: "youtube", src: "https://www.youtube.com/watch?v=ijkl9012", thumb: "images/video-thumb-4.jpg" },
+    { title: "Magazine Shoot", type: "youtube", src: "https://www.youtube.com/watch?v=mnop3456", thumb: "images/video-thumb-5.jpg" },
+    { title: "Exclusive Photoshoot", type: "youtube", src: "https://www.youtube.com/watch?v=qrst7890", thumb: "images/video-thumb-6.jpg" },
+    { title: "Nepali Song Clip", type: "youtube", src: "https://www.youtube.com/watch?v=uvwxy123", thumb: "images/video-thumb-7.jpg" },
+    { title: "Fan Tribute", type: "mp4", src: "videos/fanedit.mp4", thumb: "images/video-thumb-8.jpg" },
+    { title: "Aditi’s Short Film", type: "youtube", src: "https://www.youtube.com/watch?v=zabcd987", thumb: "images/video-thumb-9.jpg" },
+    { title: "BTS Moments", type: "youtube", src: "https://www.youtube.com/watch?v=xyz654321", thumb: "images/video-thumb-10.jpg" },
+  ];
+
+  const videosPerPage = 6;
+  let currentPage = 1;
+  const totalPages = Math.ceil(videos.length / videosPerPage);
+  const maxVisiblePages = 4;
+
+  function renderVideos() {
+    videoGrid.innerHTML = '';
+    const start = (currentPage - 1) * videosPerPage;
+    const end = start + videosPerPage;
+    const currentVideos = videos.slice(start, end);
+
+    currentVideos.forEach(video => {
+      const link = document.createElement('a');
+      link.className = 'glightbox video-card reveal';
+      link.href = video.src;
+      link.setAttribute('data-gallery', 'aditi-videos');
+      link.setAttribute('data-type', 'video');
+      link.setAttribute('data-title', video.title);
+
+      link.innerHTML = `
+        <img src="${video.thumb}" alt="${video.title}">
+        <div class="video-overlay"><span class="play-icon">▶</span></div>
+      `;
+
+      videoGrid.appendChild(link);
+    });
+
+    try { GLightbox({ selector: '.glightbox' }); } catch (err) {}
+  }
+
+  function renderPagination() {
+    pagination.innerHTML = '';
+
+    const prev = document.createElement('button');
+    prev.textContent = 'Prev';
+    prev.className = 'page-btn';
+    if (currentPage === 1) prev.classList.add('disabled');
+    prev.onclick = () => { if (currentPage > 1) { currentPage--; updateGallery(); } };
+    pagination.appendChild(prev);
+
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = startPage + maxVisiblePages - 1;
+    if (endPage > totalPages) {
+      endPage = totalPages;
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      btn.className = 'page-btn';
+      if (i === currentPage) btn.classList.add('active');
+      btn.onclick = () => { currentPage = i; updateGallery(); };
+      pagination.appendChild(btn);
+    }
+
+    const next = document.createElement('button');
+    next.textContent = 'Next';
+    next.className = 'page-btn';
+    if (currentPage === totalPages) next.classList.add('disabled');
+    next.onclick = () => { if (currentPage < totalPages) { currentPage++; updateGallery(); } };
+    pagination.appendChild(next);
+  }
+
+  function updateGallery() {
+    renderVideos();
+    renderPagination();
+    window.scrollTo({ top: videoGrid.offsetTop - 100, behavior: 'smooth' });
+  }
+
+  // Initial render
+  updateGallery();
+}
