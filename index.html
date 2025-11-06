@@ -1,110 +1,205 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Aditi Budhathoki — Fansite</title>
+  <meta name="description" content="Curated fansite for Aditi Budhathoki — galleries, news, and fan community." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Aditi Budhathoki — Fansite" />
+  <meta property="og:description" content="Curated fansite for Aditi Budhathoki — galleries, news, and fan community." />
+  <meta property="og:image" content="images/aditi-thumb.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- GLightbox (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+  <!-- Main CSS -->
   <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+
+  <!-- Theme color for mobile -->
+  <meta name="theme-color" content="#F5EFE6" />
 </head>
-<body>
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo">
-      <img src="images/logo.jpg" alt="Aditi Budhathoki Logo">
-      <div>
-        <h1>Aditi Budhathoki — Fan Club</h1>
-        <p>Photos, News & Fan Community</p>
-      </div>
+<body class="site">
+
+  <!-- top nav -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/">
+        <img src="images/logo.jpg" alt="Aditi logo" class="logo" />
+        <div>
+          <div class="brand-title">Aditi Budhathoki</div>
+          <div class="brand-sub">Fan Club</div>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="news.html" class="nav-link">News</a>
+        <a href="#fans" class="nav-link">Fan Art</a>
+        <a href="#contact" class="cta">Join</a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </nav>
     </div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#news">News</a>
-      <a href="#fans">Fans</a>
-      <a href="#contact" class="join-btn">Join</a>
-    </nav>
   </header>
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-text">
-      <h2>Aditi Budhathoki</h2>
-      <p>Welcome to the curated fansite dedicated to the Nepali actress and model Aditi Budhathoki. Explore exclusive galleries, fan art, and news updates—all in one place.</p>
-      <div class="buttons">
-        <a href="#gallery" class="btn primary">View Gallery</a>
-        <a href="#fans" class="btn secondary">Submit Fan Art</a>
+  <main>
+    <section class="hero container">
+      <div class="hero-left">
+        <small class="eyebrow reveal">Curated fansite</small>
+        <h1 class="hero-title reveal">Aditi Budhathoki — Photos, Stories & Fans</h1>
+        <p class="hero-lead reveal">Welcome to the curated space dedicated to Aditi Budhathoki. Explore high-quality galleries, latest news, and fan-created art — all gathered respectfully from public sources and community contributions.</p>
+
+        <div class="hero-actions reveal">
+          <a href="#gallery" class="btn primary">View Gallery</a>
+          <a href="#fans" class="btn ghost">Submit Fan Art</a>
+        </div>
+
+        <div class="social reveal">
+          <a href="https://instagram.com/your_fanpage_here" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://instagram.com/your_fanpage_here" target="_blank" rel="noopener">Follow</a>
+        </div>
       </div>
-    </div>
-    <div class="hero-image">
-      <img src="images/hero.jpg" alt="Aditi Budhathoki">
-    </div>
-  </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="about">
-    <h3>About This Fansite</h3>
-    <p>This is a fan-run, non-commercial site featuring public photos, updates, and fan content about Aditi Budhathoki. We curate and credit all sources properly. If you represent Aditi and want any content removed, please contact us.</p>
-  </section>
+      <figure class="hero-image reveal">
+        <img src="images/hero.jpg" alt="Aditi Budhathoki — hero" />
+      </figure>
+    </section>
 
-  <!-- GALLERY -->
-  <section id="gallery" class="gallery">
-    <h3>Featured Gallery</h3>
-    <div class="gallery-grid">
-      <img src="images/gallery-1.jpg" alt="Gallery 1">
-      <img src="images/gallery-2.jpg" alt="Gallery 2">
-      <img src="images/gallery-3.jpg" alt="Gallery 3">
-      <img src="images/gallery-4.jpg" alt="Gallery 4">
-    </div>
-  </section>
+    <!-- ABOUT -->
+    <section id="about" class="section container">
+      <div class="grid-2">
+        <div class="card reveal">
+          <h2>About this fansite</h2>
+          <p>This site is a fan-run, non-commercial collection of images, public interviews and updates about Aditi Budhathoki. All content is curated from public sources and community contributions. If you represent Aditi and would like content removed, please contact us via the contact form below.</p>
+          <ul>
+            <li>Curated galleries — high-res images</li>
+            <li>Latest news & press clippings</li>
+            <li>Fan art & submissions (moderated)</li>
+          </ul>
+        </div>
+        <div class="card panel reveal">
+          <img src="images/aditi-thumb.jpg" alt="Aditi portrait" />
+          <div class="panel-text">
+            <strong>Join the community</strong>
+            <p>Share art, photos (with credit), and messages — everything is moderated to keep the space respectful.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- NEWS -->
-  <section id="news" class="news">
-    <h3>Latest News</h3>
-    <div class="news-grid">
-      <article>
-        <h4>Aditi’s New Music Video Release</h4>
-        <p>Aditi Budhathoki stars in a new Nepali music video that’s trending on YouTube!</p>
-        <small>Nov 5, 2025</small>
-      </article>
-      <article>
-        <h4>Behind The Scenes Photoshoot</h4>
-        <p>Exclusive fan-shared photos from a behind-the-scenes shoot in Kathmandu.</p>
-        <small>Nov 2, 2025</small>
-      </article>
-      <article>
-        <h4>Fan Meetup Announcement</h4>
-        <p>Join our community Zoom event this weekend to celebrate Aditi’s latest milestones.</p>
-        <small>Oct 29, 2025</small>
-      </article>
-    </div>
-  </section>
+    <!-- GALLERY -->
+    <section id="gallery" class="section container">
+      <h2 class="section-title reveal">Featured Gallery</h2>
+      <div class="gallery-grid">
+        <!-- Each anchor uses GLightbox data-gallery attribute -->
+        <a href="images/gallery-1.jpg" class="glightbox" data-gallery="aditi" data-title="Gallery 1 — credit">
+          <img src="images/gallery-1.jpg" alt="Gallery image 1" class="reveal" />
+        </a>
+        <a href="images/gallery-2.jpg" class="glightbox" data-gallery="aditi" data-title="Gallery 2 — credit">
+          <img src="images/gallery-2.jpg" alt="Gallery image 2" class="reveal" />
+        </a>
+        <a href="images/gallery-3.jpg" class="glightbox" data-gallery="aditi" data-title="Gallery 3 — credit">
+          <img src="images/gallery-3.jpg" alt="Gallery image 3" class="reveal" />
+        </a>
+        <a href="images/gallery-4.jpg" class="glightbox" data-gallery="aditi" data-title="Gallery 4 — credit">
+          <img src="images/gallery-4.jpg" alt="Gallery image 4" class="reveal" />
+        </a>
+        <a href="images/gallery-5.jpg" class="glightbox" data-gallery="aditi" data-title="Gallery 5 — credit">
+          <img src="images/gallery-5.jpg" alt="Gallery image 5" class="reveal" />
+        </a>
+        <a href="images/gallery-6.jpg" class="glightbox" data-gallery="aditi" data-title="Gallery 6 — credit">
+          <img src="images/gallery-6.jpg" alt="Gallery image 6" class="reveal" />
+        </a>
+      </div>
+      <div class="center"><a href="gallery.html" class="btn ghost">View full gallery</a></div>
+    </section>
 
-  <!-- FAN SUBMISSION -->
-  <section id="fans" class="fans">
-    <h3>Submit Fan Art or Message</h3>
-    <form action="https://formspree.io/f/your-form-id" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" placeholder="Your Message or Description"></textarea>
-      <input type="url" name="image" placeholder="Image URL (optional)" />
-      <button type="submit" class="btn primary">Submit</button>
-    </form>
-  </section>
+    <!-- LATEST NEWS TEASERS -->
+    <section class="section container">
+      <h2 class="section-title reveal">Latest News</h2>
+      <div class="news-grid">
+        <article class="news-card reveal">
+          <img src="images/news-1.jpg" alt="news" />
+          <div class="news-body">
+            <time datetime="2025-11-05">Nov 5, 2025</time>
+            <h3>Aditi’s New Music Video Release</h3>
+            <p>Aditi stars in a new music video that’s trending on YouTube. Fans share behind-the-scenes photos.</p>
+            <a href="news.html" class="link">Read</a>
+          </div>
+        </article>
 
-  <!-- FOOTER -->
-  <footer id="contact" class="footer">
-    <div>
-      <h4>Contact</h4>
-      <p>For copyright or removal requests: <a href="mailto:yourfanemail@gmail.com">yourfanemail@gmail.com</a></p>
-    </div>
-    <div>
-      <h4>Follow Us</h4>
-      <a href="https://instagram.com/your_fanpage_here" target="_blank">@your_fanpage_here</a>
-    </div>
-    <div>
-      <p>&copy; 2025 Aditi Budhathoki Fansite — Fan-run and non-commercial.</p>
-    </div>
-  </footer>
+        <article class="news-card reveal">
+          <img src="images/news-2.jpg" alt="news" />
+          <div class="news-body">
+            <time datetime="2025-11-02">Nov 2, 2025</time>
+            <h3>Behind The Scenes Photoshoot</h3>
+            <p>Exclusive fan-shared photos from a shoot in Kathmandu — curated and credited.</p>
+            <a href="news.html" class="link">Read</a>
+          </div>
+        </article>
+
+        <article class="news-card reveal">
+          <img src="images/news-3.jpg" alt="news" />
+          <div class="news-body">
+            <time datetime="2025-10-29">Oct 29, 2025</time>
+            <h3>Fan Meetup Announcement</h3>
+            <p>Join our community Zoom event this weekend to celebrate milestones and share fan art.</p>
+            <a href="news.html" class="link">Read</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FAN SUBMISSION -->
+    <section id="fans" class="section container">
+      <h2 class="section-title reveal">Submit Fan Art or Message</h2>
+      <p class="muted reveal">Share your fan art, edits, or messages. Submissions are moderated before publishing.</p>
+
+      <!-- Replace action with your Formspree endpoint: https://formspree.io/f/your-id -->
+      <form id="fanForm" action="https://formspree.io/f/your-form-id" method="POST" class="form card reveal" novalidate>
+        <div class="form-grid">
+          <input name="name" type="text" placeholder="Your name" required />
+          <input name="email" type="email" placeholder="Your email" required />
+        </div>
+        <textarea name="message" rows="4" placeholder="Message or description"></textarea>
+        <input name="image" type="url" placeholder="Image URL (optional)" />
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Submit</button>
+          <button type="reset" class="btn ghost">Reset</button>
+        </div>
+        <div id="formMessage" class="form-message" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- CONTACT / FOOTER -->
+    <footer id="contact" class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h4>Contact</h4>
+          <p>For copyright or removal requests: <a href="mailto:yourfanemail@gmail.com">yourfanemail@gmail.com</a></p>
+        </div>
+        <div>
+          <h4>Follow</h4>
+          <a href="https://instagram.com/your_fanpage_here" target="_blank" rel="noopener">@your_fanpage_here</a>
+        </div>
+        <div class="copyright">
+          &copy; <span id="year"></span> Aditi Budhathoki Fansite — Fan-run
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- GLightbox -->
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+  <!-- Main script -->
+  <script src="script.js"></script>
 </body>
 </html>
