@@ -137,3 +137,88 @@ body{
 
 /* small accessibility focus */
 a:focus,button:focus,input:focus,textarea:focus{outline:3px solid rgba(200,140,220,0.24);outline-offset:3px}
+
+
+/* ---------------- VIDEO GALLERY & PAGINATION ---------------- */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.video-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.video-card:hover { transform: scale(1.03); }
+
+.video-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  filter: brightness(0.9);
+  display: block;
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.45));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-overlay .play-icon {
+  color: white;
+  font-size: 2rem;
+  background: rgba(215, 174, 230, 0.9);
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(215, 174, 230, 0.5);
+}
+
+/* Pagination styling */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  border: 1px solid rgba(0,0,0,0.1);
+  background: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.page-btn:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.page-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent-dark);
+}
+
+.page-btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
