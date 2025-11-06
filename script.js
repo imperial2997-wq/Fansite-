@@ -177,34 +177,36 @@ if (videoGrid && pagination) {
   updateGallery();
 }
 // ----------------- Dynamic Paginated Image Gallery -----------------
+// ----------------- Fully Automatic Image Gallery with Pagination -----------------
 const galleryGrid = document.getElementById('galleryGrid');
 const galleryPagination = document.getElementById('galleryPagination');
 
 if (galleryGrid && galleryPagination) {
-  // List all image filenames you’ve uploaded to the /images/ folder
-  const imageFiles = [
-    "aditi1.jpg",
-    "aditi2.jpg",
-    "aditi3.jpg",
-    "aditi4.jpg",
-    "aditi5.jpg",
-    "aditi6.jpg",
-    "aditi7.jpg",
-    "aditi8.jpg",
-    "aditi9.jpg",
-    "aditi10.jpg",
-    "aditi11.jpg",
-    "aditi12.jpg"
-    // add more here as you upload more images
-  ];
-
+  const username = "imperial2997-wq";  // 👈 your GitHub username
+  const repo = "Fansite-";             // 👈 your repository name
+  const path = "images";               // 👈 folder name where your images are
   const imagesPerPage = 9;
   let currentGalleryPage = 1;
-  const totalGalleryPages = Math.ceil(imageFiles.length / imagesPerPage);
   const maxVisiblePages = 4;
 
-  function renderGallery() {
+  async function fetchImages() {
+    try {
+      const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`);
+      const files = await response.json();
+      const imageFiles = files
+        .filter(file => file.name.match(/\.(jpg|jpeg|png|gif)$/i))
+        .map(file => file.name);
+      renderGallery(imageFiles);
+      renderGalleryPagination(imageFiles);
+    } catch (error) {
+      console.error("Error loading images:", error);
+      galleryGrid.innerHTML = "<p style='text-align:center;'>⚠️ Unable to load gallery images.</p>";
+    }
+  }
+
+  function renderGallery(imageFiles) {
     galleryGrid.innerHTML = '';
+    const totalPages = Math.ceil(imageFiles.length / imagesPerPage);
     const start = (currentGalleryPage - 1) * imagesPerPage;
     const end = start + imagesPerPage;
     const currentImages = imageFiles.slice(start, end);
@@ -221,20 +223,21 @@ if (galleryGrid && galleryPagination) {
     try { GLightbox({ selector: '.glightbox' }); } catch (err) {}
   }
 
-  function renderGalleryPagination() {
+  function renderGalleryPagination(imageFiles) {
     galleryPagination.innerHTML = '';
+    const totalPages = Math.ceil(imageFiles.length / imagesPerPage);
 
     const prev = document.createElement('button');
     prev.textContent = 'Prev';
     prev.className = 'page-btn';
     if (currentGalleryPage === 1) prev.classList.add('disabled');
-    prev.onclick = () => { if (currentGalleryPage > 1) { currentGalleryPage--; updateGallery(); } };
+    prev.onclick = () => { if (currentGalleryPage > 1) { currentGalleryPage--; updateGallery(imageFiles); } };
     galleryPagination.appendChild(prev);
 
     let startPage = Math.max(1, currentGalleryPage - Math.floor(maxVisiblePages / 2));
     let endPage = startPage + maxVisiblePages - 1;
-    if (endPage > totalGalleryPages) {
-      endPage = totalGalleryPages;
+    if (endPage > totalPages) {
+      endPage = totalPages;
       startPage = Math.max(1, endPage - maxVisiblePages + 1);
     }
 
@@ -243,24 +246,24 @@ if (galleryGrid && galleryPagination) {
       btn.textContent = i;
       btn.className = 'page-btn';
       if (i === currentGalleryPage) btn.classList.add('active');
-      btn.onclick = () => { currentGalleryPage = i; updateGallery(); };
+      btn.onclick = () => { currentGalleryPage = i; updateGallery(imageFiles); };
       galleryPagination.appendChild(btn);
     }
 
     const next = document.createElement('button');
     next.textContent = 'Next';
     next.className = 'page-btn';
-    if (currentGalleryPage === totalGalleryPages) next.classList.add('disabled');
-    next.onclick = () => { if (currentGalleryPage < totalGalleryPages) { currentGalleryPage++; updateGallery(); } };
+    if (currentGalleryPage === totalPages) next.classList.add('disabled');
+    next.onclick = () => { if (currentGalleryPage < totalPages) { currentGalleryPage++; updateGallery(imageFiles); } };
     galleryPagination.appendChild(next);
   }
 
-  function updateGallery() {
-    renderGallery();
-    renderGalleryPagination();
+  function updateGallery(imageFiles) {
+    renderGallery(imageFiles);
+    renderGalleryPagination(imageFiles);
     window.scrollTo({ top: galleryGrid.offsetTop - 100, behavior: 'smooth' });
   }
 
-  // Initial render
-  updateGallery();
+  // Start
+  fetchImages();
 }
